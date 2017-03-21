@@ -1,0 +1,70 @@
+body {
+    background-color: skyblue;
+}
+
+.headline {
+    margin: auto;
+    background-color: lightgrey;
+    width:800px;
+    display:block;
+    border: 2px solid;
+	float: center;
+	padding: 3em;
+}
+
+h2 {text-align:center;
+}
+p {
+    font-size:20px;
+    text-align:left;
+}
+
+.equipment {
+    margin: auto;
+    background-color: lightgrey;
+    width:600px;
+    display:block;
+    border: 2px solid;
+	float: center;
+	padding: 3em;
+}
+
+.headline:hover
+{background-color:white;
+}
+
+.equipment:hover
+{background-color: white;
+}
+
+.verlinkung {
+    margin: auto;
+    background-color: lightgrey;
+    text-align: center;
+    width:350px;
+    display:block;
+    border: 2px solid;
+	float: center;
+	padding: 1.5em; 
+}
+.verlinkung >a:visited
+    
+}
+
+.footer {
+    background-color: grey;
+    border: 2px solid black;
+    border-style:groove;
+	height: 75px;
+    width: 300px;
+}
+.footer>p {
+    display: inline-block;
+    color: white;
+    font-size: 2em;
+    margin: 25px 120px 25px 120px;
+    
+}
+.footer>p:hover {
+    color: blue;
+}
