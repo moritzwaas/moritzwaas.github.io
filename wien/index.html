@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Stadtspaziergang Wien</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
@@ -14,22 +15,32 @@
     <script src="wanderwege_linien.json.js"></script>
     <script src="maerkte_flaechen.json.js"></script>
 
+
     <style>
+	body {
+    padding: 0;
+    margin: 0;
+	}
+	html, body, #wienMap {
+		height: 100vh;
+		width: 100vw;
+	}
         h1 {
             text-align: center;
         }
-
+/*
         #wienMap {
             width: 900px;
             height: 600px;
             border: 1px solid black;
             margin: auto;
         }
+		*/
     </style>
 </head>
 
 <body>
-    <h1>Stadtspaziergang Wien</h1>
+  <!--<h1>Stadtspaziergang Wien</h1>-->
 
     <div id="wienMap"></div>
     <h3>Quelle Geodaten</h3>
@@ -214,6 +225,8 @@
 
         // Ausschnitt setzen
         map.fitBounds(punkteSpaziergang.getBounds());
+		
+		map.locate({setView: true, maxZoom: 16});
     </script>
 
 </body>
