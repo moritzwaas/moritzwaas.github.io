@@ -8,165 +8,167 @@
     <title>basemap.at mit leaflet-hash Plugin</title>
 
     <link rel="stylesheet" href="js/leaflet/leaflet.css" />
-	<link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css" />
+    <link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css" />
     <script src="js/leaflet/leaflet.js"></script>
     <script src="js/leaflet-hash/leaflet-hash.js"></script>
-	<script src="data/AdlerwegEtappe04.js"></script>
-	<script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
-	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
-	
+    <script src="data/AdlerwegEtappe04.js"></script>
+    <script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
+
 
     <style>
         body {
             padding: 0px;
             margin: 0px;
         }
+
         #map {
             height: 600px;
             width: 1024px;
         }
+
         #text {
             width: 1024px;
-
         }
-		p {
-			margin-top: 1.1em;
-			}
+
+        p {
+            margin-top: 1.1em;
+        }
     </style>
 </head>
-    <div id="text">
-<body>
-<h3>Adlerweg-Etappe 04: Kufstein- Gasthof Buchhacker</h3>
-<p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.<br><br>
-<a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Link zur Etappenseite</a><br>
-<a href="https://github.com/moritzwaas/moritzwaas.github.io">Moritz Waas Github-Seite</a>
-</p>
+<div id="text">
+
+    <body>
+        <h3>Adlerweg-Etappe 04: Kufstein- Gasthof Buchhacker</h3>
+        <p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.<br><br>
+            <a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Link zur Etappenseite</a><br>
+            <a href="https://github.com/moritzwaas/moritzwaas.github.io">Moritz Waas Github-Seite</a>
+        </p>
 </div>
-    <div id="map"></div>
+<div id="map"></div>
 
-    <script>
-        // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
-        var layers = {
-            geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapgrau: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaphidpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaporthofoto30cm: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            osm: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                subdomains: ['a', 'b', 'c'],
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            })
-        };
-        // Karte definieren
-        var map = L.map('map', {
-            layers: [layers.geolandbasemap],
-            center : [47.654, 13.370],
-            zoom : 8
+<script>
+    // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
+    var layers = {
+        geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
+            subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+            attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+        }),
+        bmapgrau: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
+            subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+            attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+        }),
+        bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
+            subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+            attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+        }),
+        bmaphidpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
+            subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+            attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+        }),
+        bmaporthofoto30cm: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
+            subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+            attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+        }),
+        osm: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            subdomains: ['a', 'b', 'c'],
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
+    };
+    // Karte definieren
+    var map = L.map('map', {
+        layers: [layers.geolandbasemap],
+        center: [47.654, 13.370],
+        zoom: 8
+    });
+    // Maßstab hinzufügen
+    L.control.scale({
+        maxWidth: 200,
+        metric: true,
+        imperial: false
+    }).addTo(map);
+    // WMTS-Layer Auswahl hinzufügen
+    var layerControl = L.control.layers({
+        "basemap.at - STANDARD": layers.geolandbasemap,
+        "basemap.at - GRAU": layers.bmapgrau,
+        "basemap.at - OVERLAY": layers.bmapoverlay,
+        "basemap.at - HIGH-DPI": layers.bmaphidpi,
+        "basemap.at - ORTHOFOTO": layers.bmaporthofoto30cm,
+        "OpenStreetMap": layers.osm,
+    }).addTo(map);
+    // leaflet-hash aktivieren
+    var hash = new L.Hash(map);
+    var adlerweg04 = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
+
+    // Höhenprofil control hinzufügen
+    var profileControl = L.control.elevation({
+        position: 'bottomleft',
+        theme: 'steelblue-theme'
+    });
+    profileControl.addTo(map);
+
+
+    // GPX Track laden
+    gpxTrack = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
+
+    // nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
+    gpxTrack.on('ready', function() {
+        // Popup hinzufügen
+        var markup = '<h3>Adlerweg-Etappe 4: Kufstein –  Alpengasthof Buchacker</h3>';
+        markup += '<p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.</p>'
+        markup += '<li>Ausgangspunkt: Kufstein</li>';
+        markup += '<li>Endpunkt: Alpengasthaus Buchacker</li>';
+        markup += '<li>Höhenmeter bergauf: 1330</li>';
+        markup += '<li>Höhenmeter bergab: 500</li>';
+        markup += '<li>Höchster Punkt: 1617</li>';
+        markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
+        markup += '<li>Streckenlänge (in km): 11</li>';
+        markup += '<li>Gehzeit (in Stunden): 5,5</li>';
+        markup += '<li>Einkehrmöglichkeiten: Höhlensteinhaus, Gasthof Buchhacker</li>';
+        markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Weitere Informationen</a></li>';
+        gpxTrack.bindPopup(markup, {
+            maxWidth: 450
         });
-        // Maßstab hinzufügen
-        L.control.scale({
-            maxWidth: 200,
-            metric: true,
-            imperial: false
-        }).addTo(map);
-        // WMTS-Layer Auswahl hinzufügen
-        var layerControl = L.control.layers({
-            "basemap.at - STANDARD": layers.geolandbasemap,
-            "basemap.at - GRAU": layers.bmapgrau,
-            "basemap.at - OVERLAY": layers.bmapoverlay,
-            "basemap.at - HIGH-DPI": layers.bmaphidpi,
-            "basemap.at - ORTHOFOTO": layers.bmaporthofoto30cm,
-            "OpenStreetMap": layers.osm,
-        }).addTo(map);
-        // leaflet-hash aktivieren
-        var hash = new L.Hash(map);
-		var adlerweg04 = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
-	
-        // Höhenprofil control hinzufügen
-        var profileControl = L.control.elevation({
-            position : 'bottomleft',
-            theme : 'steelblue-theme'
+
+        // Ausschnitt setzen
+        map.fitBounds(gpxTrack.getBounds());
+
+        // Höhenprofil erzeugen
+        gpxTrack.eachLayer(function(layer) {
+            profileControl.addData(layer.feature);
         });
-        profileControl.addTo(map);
+    });
 
-		
-		       // GPX Track laden
-        gpxTrack = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
+    //Koordinaten der Hütte reinziehen. Mit [] können mehrere Hütten gespeichert werden:
+    var restaurant1 = L.marker([47.553121, 12.071708], {
+        title: 'Höhlensteinhaus',
+        icon: L.icon({
+            iconUrl: 'icons/restaurant.png',
+        })
+    }).addTo(map);
 
-        // nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
-        gpxTrack.on('ready', function () {
-            // Popup hinzufügen
-            var markup = '<h3>Adlerweg-Etappe 4: Kufstein –  Alpengasthof Buchacker</h3>';
-            markup += '<p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.</p>'
-            markup += '<li>Ausgangspunkt: Kufstein</li>';
-            markup += '<li>Endpunkt: Alpengasthaus Buchacker</li>';
-            markup += '<li>Höhenmeter bergauf: 1330</li>';
-            markup += '<li>Höhenmeter bergab: 500</li>';
-            markup += '<li>Höchster Punkt: 1617</li>';
-            markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
-            markup += '<li>Streckenlänge (in km): 11</li>';
-            markup += '<li>Gehzeit (in Stunden): 5,5</li>';
-            markup += '<li>Einkehrmöglichkeiten: Höhlensteinhaus, Gasthof Buchhacker</li>';
-            markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Weitere Informationen</a></li>';
-            gpxTrack.bindPopup(markup, { maxWidth : 450 });
+    var restaurant2 = L.marker([47.533352, 12.018810], {
+        title: 'Gasthof Buchhacker',
+        icon: L.icon({
+            iconUrl: 'icons/restaurant.png',
+        })
+    }).addTo(map);
 
-            // Ausschnitt setzen
-            map.fitBounds(gpxTrack.getBounds());
+    var startpunkt = L.marker([47.54523480, 12.10860720], {
+        title: 'Startpunkt',
+        icon: L.icon({
+            iconUrl: 'icons/start-race-2.png'
+        })
+    }).addTo(map);
 
-            // Höhenprofil erzeugen
-            gpxTrack.eachLayer(function(layer) {
-                profileControl.addData(layer.feature);
-            });
-        });
-		
-		//Koordinaten der Hütte reinziehen. Mit [] können mehrere Hütten gespeichert werden:
-		var restaurant1 = L.marker([47.553121, 12.071708],{
-		title: 'Höhlensteinhaus',
-		icon: L.icon({
-		iconUrl: 'icons/restaurant.png',
-		})
-		}).addTo(map);
-		
-		var restaurant2 = L.marker([47.533352, 12.018810],{
-		title: 'Gasthof Buchhacker',
-		icon: L.icon({
-		iconUrl: 'icons/restaurant.png',
-		})
-		}).addTo(map);
-		
-		var startpunkt = L.marker([47.54523480, 12.10860720],{
-		title: 'Startpunkt',
-		icon: L.icon({
-		iconUrl: 'icons/start-race-2.png'
-		})
-		}).addTo(map);
-		
-		var endpunkt = L.marker([47.533352, 12.018871],{
-		title: 'Endpunkt',
-		icon: L.icon({
-		iconUrl: 'icons/finish.png',
-		})
-		}).addTo(map);
-		
-
-		
-    </script>
+    var endpunkt = L.marker([47.533352, 12.018871], {
+        title: 'Endpunkt',
+        icon: L.icon({
+            iconUrl: 'icons/finish.png',
+        })
+    }).addTo(map);
+</script>
 
 </body>
 
