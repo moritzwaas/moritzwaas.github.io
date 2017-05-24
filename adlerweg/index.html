@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css" />
     <script src="js/leaflet/leaflet.js"></script>
     <script src="js/leaflet-hash/leaflet-hash.js"></script>
-    <script src="data/AdlerwegEtappe04.js"></script>
     <script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
@@ -47,6 +46,34 @@
         </p>
 </div>
 <div id="map"></div>
+<select id="etappen">
+<option value="AdlerwegEtappe01.gpx">Adlerweg Etappe 1 </option>
+<option value="AdlerwegEtappe02.gpx">Adlerweg Etappe 2 </option>
+<option value="AdlerwegEtappe03.gpx">Adlerweg Etappe 3 </option>
+<option value="AdlerwegEtappe04.gpx">Adlerweg Etappe 4 </option>
+<option value="AdlerwegEtappe05.gpx">Adlerweg Etappe 5 </option>
+<option value="AdlerwegEtappe06.gpx">Adlerweg Etappe 6 </option>
+<option value="AdlerwegEtappe07.gpx">Adlerweg Etappe 7 </option>
+<option value="AdlerwegEtappe08.gpx">Adlerweg Etappe 8 </option>
+<option value="AdlerwegEtappe09.gpx">Adlerweg Etappe 9 </option>
+<option value="AdlerwegEtappe10.gpx">Adlerweg Etappe 10</option>
+<option value="AdlerwegEtappe11.gpx">Adlerweg Etappe 11</option>
+<option value="AdlerwegEtappe12.gpx">Adlerweg Etappe 12</option>
+<option value="AdlerwegEtappe13.gpx">Adlerweg Etappe 13</option>
+<option value="AdlerwegEtappe14.gpx">Adlerweg Etappe 14</option>
+<option value="AdlerwegEtappe15.gpx">Adlerweg Etappe 15</option>
+<option value="AdlerwegEtappe16.gpx">Adlerweg Etappe 16</option>
+<option value="AdlerwegEtappe17.gpx">Adlerweg Etappe 17</option>
+<option value="AdlerwegEtappe18.gpx">Adlerweg Etappe 18</option>
+<option value="AdlerwegEtappe19.gpx">Adlerweg Etappe 19</option>
+<option value="AdlerwegEtappe20.gpx">Adlerweg Etappe 20</option>
+<option value="AdlerwegEtappe21.gpx">Adlerweg Etappe 21</option>
+<option value="AdlerwegEtappe22.gpx">Adlerweg Etappe 22</option>
+<option value="AdlerwegEtappe23.gpx">Adlerweg Etappe 23</option>
+<option value="AdlerwegEtappe24.gpx">Adlerweg Etappe 24</option>
+<option value="AdlerwegEtappe25.gpx">Adlerweg Etappe 25</option>
+</select>
+
 
 <script>
     // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
@@ -101,6 +128,7 @@
     var hash = new L.Hash(map);
     var adlerweg04 = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
 
+
     // Höhenprofil control hinzufügen
     var profileControl = L.control.elevation({
         position: 'bottomleft',
@@ -108,68 +136,166 @@
     });
     profileControl.addTo(map);
 
+    function loadTrack(track) {
 
-    // GPX Track laden
-    gpxTrack = omnivore.gpx('data/AdlerwegEtappe04.gpx').addTo(map);
+        // GPX Track laden
+        console.log(track)
+        gpxTrack = omnivore.gpx('data/' + track).addTo(map);
 
-    // nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
-    gpxTrack.on('ready', function() {
-        // Popup hinzufügen
-        var markup = '<h3>Adlerweg-Etappe 4: Kufstein –  Alpengasthof Buchacker</h3>';
-        markup += '<p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.</p>'
-        markup += '<li>Ausgangspunkt: Kufstein</li>';
-        markup += '<li>Endpunkt: Alpengasthaus Buchacker</li>';
-        markup += '<li>Höhenmeter bergauf: 1330</li>';
-        markup += '<li>Höhenmeter bergab: 500</li>';
-        markup += '<li>Höchster Punkt: 1617</li>';
-        markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
-        markup += '<li>Streckenlänge (in km): 11</li>';
-        markup += '<li>Gehzeit (in Stunden): 5,5</li>';
-        markup += '<li>Einkehrmöglichkeiten: Höhlensteinhaus, Gasthof Buchhacker</li>';
-        markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Weitere Informationen</a></li>';
-        gpxTrack.bindPopup(markup, {
-            maxWidth: 450
+        // nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
+        gpxTrack.on('ready', function() {
+            // Popup hinzufügen
+            var markup = '<h3>Adlerweg-Etappe 4: Kufstein –  Alpengasthof Buchacker</h3>';
+            markup += '<p>Nicht ganz ohne Schweiß sind die mehr als 1.300 Höhenmeter dieser Adlerweg-Etappe zu bewältigen. Aber es lohnt sich! Am Ende der Strecke wartet ein besonderes Naturschauspiel: die Hundsalm-Eishöhle, eine auf knapp 1.400 Meter liegende Eis- und Tropfsteinhöhle.</p>'
+            markup += '<li>Ausgangspunkt: Kufstein</li>';
+            markup += '<li>Endpunkt: Alpengasthaus Buchacker</li>';
+            markup += '<li>Höhenmeter bergauf: 1330</li>';
+            markup += '<li>Höhenmeter bergab: 500</li>';
+            markup += '<li>Höchster Punkt: 1617</li>';
+            markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
+            markup += '<li>Streckenlänge (in km): 11</li>';
+            markup += '<li>Gehzeit (in Stunden): 5,5</li>';
+            markup += '<li>Einkehrmöglichkeiten: Höhlensteinhaus, Gasthof Buchhacker</li>';
+            markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-4-kufstein-alpengasthof-buchacker">Weitere Informationen</a></li>';
+            gpxTrack.bindPopup(markup, {
+                maxWidth: 450
+            });
+
+            // Ausschnitt setzen
+            map.fitBounds(gpxTrack.getBounds());
+
+            // Höhenprofil erzeugen
+			profileControl.clear();
+            gpxTrack.eachLayer(function(layer) {
+                profileControl.addData(layer.feature);
+
+                //var pts =
+                //console.log(layer.feature.geometry.coordinates)
+                var pts = layer.feature.geometry.coordinates;
+
+                for (var i = 1; i < pts.length; i += 1) {
+                    //console.log(pts[i]); //aktueller punkt
+                    //	console.log(pts[i-1]); //vorheriger punkt
+
+                    //Entfernung bestimmen
+                    var dist = map.distance(
+                        [pts[i][1], pts[i][0]], [pts[i - 1][1], pts[i - 1][0]]
+                    );
+                    //console.log(dist);
+
+
+
+                    var delta = pts[i][2] - pts[i - 1][2];
+                    //console.log(delta,"Höhenmeter auf" , dist, "m Strecke")
+
+                    var rad = Math.atan(delta / dist);
+                    var deg = (rad * (180 / Math.PI)).toFixed(1);
+                    //console.log(deg);
+
+                    //colorbrewer
+
+
+                    var farbe;
+
+                    switch (true) { // checks if condition is true, not for certain values of a variable
+                        case (deg >= 20):
+                            farbe = "#bd0026";
+                            break;
+                        case (deg >= 15):
+                            farbe = "#f03b20";
+                            break;
+                        case (deg >= 10):
+                            farbe = "#fd8d3c";
+                            break;
+                        case (deg >= 5):
+                            farbe = "#feb24c";
+                            break;
+                        case (deg >= 1):
+                            farbe = "#fed976";
+                            break;
+                        case (deg >= -1):
+                            farbe = "yellow";
+                            break;
+                        case (deg >= -5):
+                            farbe = "#d9f0a3";
+                            break;
+                        case (deg >= -10):
+                            farbe = "#addd8e";
+                            break;
+                        case (deg >= -15):
+                            farbe = "#78c679";
+                            break;
+                        case (deg >= -20):
+                            farbe = "#31a354";
+                            break;
+                        case (deg < -20):
+                            farbe = "#006837";
+                            break;
+                    }
+                    //console.log(deg,farbe);
+
+                    //line zeichnen
+                    var pointA = new L.LatLng(pts[i][1], pts[i][0]);
+                    var pointB = new L.LatLng(pts[i - 1][1], pts[i - 1][0]);
+                    var pointList = [pointA, pointB];
+
+                    var firstpolyline = new L.Polyline(pointList, {
+                        color: farbe,
+                        weight: 6,
+                        opacity: 3,
+                        smoothFactor: 1
+
+                    });
+
+                    firstpolyline.addTo(map);
+
+
+                }
+            });
         });
+	}
+	//Koordinaten der Hütte reinziehen. Mit [] können mehrere Hütten gespeichert werden:
+	var restaurant1 = L.marker([47.553121, 12.071708], {
+		title: 'Höhlensteinhaus',
+		icon: L.icon({
+			iconUrl: 'icons/restaurant.png',
+		})
+	}).addTo(map);
 
-        // Ausschnitt setzen
-        map.fitBounds(gpxTrack.getBounds());
+	var restaurant2 = L.marker([47.533352, 12.018810], {
+		title: 'Gasthof Buchhacker',
+		icon: L.icon({
+			iconUrl: 'icons/restaurant.png',
+		})
+	}).addTo(map);
 
-        // Höhenprofil erzeugen
-        gpxTrack.eachLayer(function(layer) {
-            profileControl.addData(layer.feature);
-        });
-    });
+	var startpunkt = L.marker([47.54523480, 12.10860720], {
+		title: 'Startpunkt',
+		icon: L.icon({
+			iconUrl: 'icons/start-race-2.png'
+		})
+	}).addTo(map);
 
-    //Koordinaten der Hütte reinziehen. Mit [] können mehrere Hütten gespeichert werden:
-    var restaurant1 = L.marker([47.553121, 12.071708], {
-        title: 'Höhlensteinhaus',
-        icon: L.icon({
-            iconUrl: 'icons/restaurant.png',
-        })
-    }).addTo(map);
+	var endpunkt = L.marker([47.533352, 12.018871], {
+		title: 'Endpunkt',
+		icon: L.icon({
+			iconUrl: 'icons/finish.png',
+		})
+	}).addTo(map);
 
-    var restaurant2 = L.marker([47.533352, 12.018810], {
-        title: 'Gasthof Buchhacker',
-        icon: L.icon({
-            iconUrl: 'icons/restaurant.png',
-        })
-    }).addTo(map);
+	var etappenSelektor = document.getElementById("etappen");
+	alert(etappenSelektor)
+	//console.log("Selector: ", etappenSelektor);
+	etappenSelektor.onchange = function(evt) {
+		console.log("change event: ", evt);
+		console.log("GPX Track laden: ", etappenSelektor[etappenSelektor.selectedIndex].value);
+		loadTrack(etappenSelektor[etappenSelektor.selectedIndex].value);
+	}
+	loadTrack("AdlerwegEtappe01.gpx");
 
-    var startpunkt = L.marker([47.54523480, 12.10860720], {
-        title: 'Startpunkt',
-        icon: L.icon({
-            iconUrl: 'icons/start-race-2.png'
-        })
-    }).addTo(map);
-
-    var endpunkt = L.marker([47.533352, 12.018871], {
-        title: 'Endpunkt',
-        icon: L.icon({
-            iconUrl: 'icons/finish.png',
-        })
-    }).addTo(map);
+    
 </script>
 
 </body>
 
-</html> 
+</html>
